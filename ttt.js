@@ -22,12 +22,15 @@ function turnClick(square) {
 }
 
 function turn(squareId, player) {
-    origBoard[squareId] = player;
-    document.getElementById(squareId).innerText = player;
-    console.log(origBoard);
-    let gameWon = checkWin(origBoard, player);
-    if (gameWon == true) {
-        gameOver(gameWon);
+    if (origBoard[squareId] != 'X' && origBoard[squareId] != 'O') {
+        origBoard[squareId] = player;
+        console.log(origBoard[squareId]);
+        document.getElementById(squareId).innerText = player;
+        console.log(origBoard[squareId]);
+        let gameWon = checkWin(origBoard, player);
+        if (gameWon == true) {
+            gameOver(gameWon);
+        }
     }
 }
 
