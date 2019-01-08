@@ -15,7 +15,6 @@ function startGame() {
         cells[i].innerText = '';
         cells[i].addEventListener('click', turnClick, false);
     }
-
 }
 
 function turnClick(square) {
@@ -36,7 +35,6 @@ function turn(squareId, player) {
         origBoard[squareId] = player;
         document.getElementById(squareId).innerText = player;
         checkWin(origBoard, player);
-
     }
 }
 
@@ -56,9 +54,9 @@ function checkWin(board, player) {
                 document.getElementById('endgame').innerText = "Couldn't even win against a Robot?";
             }
             document.getElementById('endgame').style.display = "block";
-            cells[i].removeEventListener('click', turnClick, false);
+            for (let j in cells) {
+                cells[j].removeEventListener('click', turnClick, false);
+            }
         }
-
     }
-
 }
