@@ -9,6 +9,7 @@ const cells = document.querySelectorAll('.cell');
 startGame();
 
 function startGame() {
+    document.getElementById('endgame').style.display = "none";
     origBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     for (var i = 0; i < cells.length; i++) {
         cells[i].innerText = '';
@@ -46,12 +47,16 @@ function checkWin(board, player) {
             playerSpots.push(i);
         }
     }
-    console.log(playerSpots);
-    console.log(board);
     for (let i = 0; i < winner.length; i++) {
         if (playerSpots.includes(winner[i][0]) && playerSpots.includes(winner[i][1]) && playerSpots.includes(winner[i][2])) {
-            console.log("Player " + player + " is the WINNER!");
-
+            if (player == 'X') {
+                document.getElementById('endgame').innerText = "Good job human! You beat the Robot";
+            }
+            if (player == 'O') {
+                document.getElementById('endgame').innerText = "Couldn't even win against a Robot?";
+            }
+            document.getElementById('endgame').style.display = "block";
+            cells[i].removeEventListener('click', turnClick, false);
         }
 
     }
