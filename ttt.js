@@ -18,19 +18,24 @@ function startGame() {
 }
 
 function turnClick(square) {
-    turn(square.target.id, realPlayer)
+    turn(square.target.id, realPlayer);
+    aiTurn(roboPlayer);
+}
+
+function aiTurn(player) {
+    var rand = Math.floor(Math.random() * 8) + 0;
+    while (origBoard[rand] == 'X' || origBoard[rand] == 'O') {
+        rand = Math.floor(Math.random() * 8) + 0;
+    }
+    turn(rand, player);
 }
 
 function turn(squareId, player) {
     if (origBoard[squareId] != 'X' && origBoard[squareId] != 'O') {
         origBoard[squareId] = player;
-        console.log(origBoard[squareId]);
         document.getElementById(squareId).innerText = player;
-        console.log(origBoard[squareId]);
-        let gameWon = checkWin(origBoard, player);
-        if (gameWon == true) {
-            gameOver(gameWon);
-        }
+        checkWin(origBoard, player);
+
     }
 }
 
@@ -42,10 +47,13 @@ function checkWin(board, player) {
         }
     }
     console.log(playerSpots);
+    console.log(board);
     for (let i = 0; i < winner.length; i++) {
         if (playerSpots.includes(winner[i][0]) && playerSpots.includes(winner[i][1]) && playerSpots.includes(winner[i][2])) {
-            console.log("WINNER!");
+            console.log("Player " + player + " is the WINNER!");
+
         }
+
     }
 
 }
